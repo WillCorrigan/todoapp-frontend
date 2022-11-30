@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
 import axios from "axios";
-
+import React, { useEffect, useState } from "react";
+import { BeatLoader } from "react-spinners";
+import { Navigate } from "react-router-dom";
 import Cookies from "universal-cookie";
+import "./AuthComponent.css";
 const cookies = new Cookies();
 
-const token = cookies.get("TOKEN");
+const token = cookies.get("AUTHENTICATION_TOKEN");
 
 export default function AuthComponent() {
   const [message, setMessage] = useState("");
 
-  // useEffect automatically executes once the page is fully loaded
   useEffect(() => {
-    // set configurations for the API call here
     const configuration = {
       method: "get",
       url: "https://todoapptesting.fly.dev/auth-needed",
@@ -23,7 +23,6 @@ export default function AuthComponent() {
     // make the API call
     axios(configuration)
       .then((result) => {
-        // assign the message in our result to the message we initialized above
         setMessage(result.data.message);
       })
       .catch((error) => {
@@ -31,11 +30,32 @@ export default function AuthComponent() {
       });
   }, []);
 
+  const logout = () => {
+    cookies.remove("AUTHENTICATION_TOKEN", { path: "/" });
+
+    <Navigate to={`/`} replace />;
+  };
+
+  const messageLoaded = message ? (
+    <h3 className="text-center text-danger">{message}</h3>
+  ) : (
+    <BeatLoader
+      color="#491FF0"
+      loading="true"
+      aria-label="Loading Spinner"
+      data-testid="loader"
+    />
+  );
+
   return (
     <div>
       <h1 className="text-center">Auth Component</h1>
-
-      <h3 className="text-center text-danger">{message}</h3>
+      <div className="justify-content-center">{messageLoaded}</div>
+      <div className="logout-button-container">
+        <button type="submit" variant="danger" onClick={() => logout()}>
+          Logout
+        </button>
+      </div>
     </div>
   );
 }

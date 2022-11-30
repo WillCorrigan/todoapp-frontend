@@ -1,0 +1,25 @@
+.logout-button-container {
+  padding-left: 40px;
+  padding-bottom: 40px;
+  margin-top: auto;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.logout-profile-img {
+  height: 32px;
+  width: 32px;
+}
+
+.logout-side-div {
+  display: flex;
+  flex-direction: column;
+}
+
+.logout-button {
+  border: none;
+  background: none;
+}
