@@ -2,7 +2,10 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import Logout from "./Logout";
 import "./SideNav.css";
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
+const token = cookies.get("AUTHENTICATION_TOKEN");
 const SideNav = () => {
   return (
     <nav className="side-nav-container">
@@ -17,7 +20,7 @@ const SideNav = () => {
         Auth Needed
       </NavLink>
 
-      <Logout />
+      {token && <Logout />}
     </nav>
   );
 };

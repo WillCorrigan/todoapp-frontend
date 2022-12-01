@@ -2,17 +2,27 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import FreeComponent from "./Components/NotAuthenticated/FreeComponent";
 import AuthComponent from "./Components/Authenticated/AuthComponent";
-import Account from "./Components/Account/Account";
 import AuthenticationWrapper from "./RouteWrappers/Authentication/AuthenticationWrapper";
 import SideNav from "./Components/SideNav/SideNav";
+import Home from "./Components/Home/Home";
+import Login from "./Components/Account/Login/Login";
+import Register from "./Components/Account/Register/Register";
 
 function App() {
   return (
     <div className="App" id="outer-container">
-      {/* <h1 className="header">Todo App</h1> */}
       <SideNav />
       <Routes>
-        <Route path="/" element={<Account />} />
+        <Route
+          path="/"
+          element={
+            <AuthenticationWrapper>
+              <Home />
+            </AuthenticationWrapper>
+          }
+        />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/free" element={<FreeComponent />} />
         <Route
           path="/auth"
@@ -22,7 +32,14 @@ function App() {
             </AuthenticationWrapper>
           }
         />
-        <Route path="*" element={<Account />} />
+        <Route
+          path="*"
+          element={
+            <AuthenticationWrapper>
+              <Home />
+            </AuthenticationWrapper>
+          }
+        />
       </Routes>
     </div>
   );

@@ -22,4 +22,9 @@
 .logout-button {
   border: none;
   background: none;
+  text-decoration: underline;
+}
+
+.logout-button:hover {
+  cursor: pointer;
 }

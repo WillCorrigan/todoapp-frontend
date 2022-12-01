@@ -1,13 +1,20 @@
-import React, { useState } from "react";
 import axios from "axios";
+import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
+import "./Register.css";
 
 export default function Register() {
-  const [values, setValues] = useState({
-    username: "",
-    email: "",
-    password: "",
-  });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [registered, setRegistered] = useState(false);
+
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -15,7 +22,10 @@ export default function Register() {
     const configuration = {
       method: "post",
       url: "https://todoapptesting.fly.dev/register",
-      data: values,
+      data: {
+        email,
+        password,
+      },
     };
 
     axios(configuration)
@@ -28,87 +38,42 @@ export default function Register() {
   };
 
   return (
-    <div class="form-container">
-      <h2>Register</h2>
-      <form class="register-form">
-        {/* Uncomment the next line to show the success message */}
-        {/* <div class="success-message">Success! Thank you for registering</div> */}
-        <input
-          id="first-name"
-          class="form-field"
-          type="text"
-          placeholder="First Name"
-          name="firstName"
-        />
-        {/* Uncomment the next line to show the error message */}
-        {/* <span id="first-name-error">Please enter a first name</span> */}
-        <input
-          id="last-name"
-          class="form-field"
-          type="text"
-          placeholder="Last Name"
-          name="lastName"
-        />
-        {/* Uncomment the next line to show the error message */}
-        {/* <span id="last-name-error">Please enter a last name</span> */}
-        <input
-          id="email"
-          class="form-field"
-          type="text"
-          placeholder="Email"
-          name="email"
-        />
-        {/* Uncomment the next line to show the error message */}
-        {/* <span id="email-error">Please enter an email address</span> */}
-        <button class="form-field" type="submit">
-          Register
+    <div className="register-container">
+      <form className="register-form" action="#">
+        <h1 className="register-title">Register</h1>
+        <NavLink className="register-login-link" to="/login">
+          or sign in
+        </NavLink>
+        <div className="register-input-container">
+          <input
+            className="register-input"
+            type="email"
+            placeholder="Email"
+            onChange={handleEmailChange}
+          ></input>
+        </div>
+        <div>
+          <input
+            className="register-input"
+            type="password"
+            placeholder="Password"
+            onChange={handlePasswordChange}
+          />
+        </div>
+        <button
+          type="submit"
+          className="register-submit-button"
+          onClick={handleSubmit}
+          onSubmit={handleSubmit}
+        >
+          Sign In
         </button>
+        {registered && (
+          <span className="register-successful-message">
+            Successfully registered
+          </span>
+        )}
       </form>
     </div>
   );
-
-  // return (
-  //   <>
-  //     <h2>Register</h2>
-  //     <Form onSubmit={(e) => handleSubmit(e)}>
-  //       {/* email */}
-  //       <Form.Group controlId="formBasicEmail">
-  //         <Form.Label>Email address</Form.Label>
-  //         <Form.Control
-  //           type="email"
-  //           name="email"
-  //           value={email}
-  //           onChange={(e) => setEmail(e.target.value)}
-  //           placeholder="Enter email"
-  //         />
-  //       </Form.Group>
-
-  //       {/* password */}
-  //       <Form.Group controlId="formBasicPassword">
-  //         <Form.Label>Password</Form.Label>
-  //         <Form.Control
-  //           type="password"
-  //           name="password"
-  //           value={password}
-  //           onChange={(e) => setPassword(e.target.value)}
-  //           placeholder="Password"
-  //         />
-  //       </Form.Group>
-
-  //       {/* submit button */}
-  //       <Button
-  //         variant="primary"
-  //         type="submit"
-  //         onClick={(e) => handleSubmit(e)}
-  //       >
-  //         Submit
-  //       </Button>
-  //       {register ? (
-  //         <p className="text-success">You Are Registered Successfully</p>
-  //       ) : (
-  //         <p className="text-danger">You Are Not Registered</p>
-  //       )}
-  //     </Form>
-  //   </>
-  // );
 }

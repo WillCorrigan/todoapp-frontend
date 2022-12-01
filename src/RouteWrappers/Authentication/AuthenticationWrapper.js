@@ -6,5 +6,5 @@ const cookies = new Cookies();
 export default function AuthenticationWrapper({ children }) {
   const token = cookies.get("AUTHENTICATION_TOKEN");
 
-  return token ? children : <Navigate to={`/`} replace />;
+  return token ? children : <Navigate to={`/login`} replace />;
 }

@@ -1,14 +1,23 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
+import "./Login.css";
+import { NavLink } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [login, setLogin] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   const cookies = new Cookies();
+
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
 
   const handleSubmit = (e) => {
     // prevent the form from refreshing the whole page
@@ -27,7 +36,6 @@ export default function Login() {
     // make the API call
     axios(configuration)
       .then((result) => {
-        setLogin(true);
         cookies.set("AUTHENTICATION_TOKEN", result.data.token, {
           path: "/",
         });
@@ -40,54 +48,38 @@ export default function Login() {
       });
   };
   return (
-    <>
-      <h2>Login</h2>
-    </>
+    <div className="login-container">
+      <form className="login-form" action="#">
+        <h1 className="login-title">Sign In</h1>
+        <NavLink className="login-register-link" to="/register">
+          or create a new account
+        </NavLink>
+        <div className="login-input-container">
+          <input
+            className="login-input"
+            type="email"
+            placeholder="Email"
+            onChange={handleEmailChange}
+          ></input>
+        </div>
+        <div>
+          <input
+            className="login-input"
+            type="password"
+            placeholder="Password"
+            onChange={handlePasswordChange}
+          />
+        </div>
+        <button
+          type="submit"
+          className="login-submit-button"
+          onClick={handleSubmit}
+          onSubmit={handleSubmit}
+        >
+          Sign In
+        </button>
+        <span className="login-error-message">{errorMessage}</span>
+      </form>
+    </div>
   );
-  // return (
-  //   <>
-  //     <h2>Login</h2>
-  //     <Form onSubmit={(e) => handleSubmit(e)}>
-  //       {/* email */}
-  //       <Form.Group controlId="formBasicEmail">
-  //         <Form.Label>Email address</Form.Label>
-  //         <Form.Control
-  //           type="email"
-  //           name="email"
-  //           value={email}
-  //           onChange={(e) => setEmail(e.target.value)}
-  //           placeholder="Enter email"
-  //         />
-  //       </Form.Group>
-
-  //       {/* password */}
-  //       <Form.Group controlId="formBasicPassword">
-  //         <Form.Label>Password</Form.Label>
-  //         <Form.Control
-  //           type="password"
-  //           name="password"
-  //           value={password}
-  //           onChange={(e) => setPassword(e.target.value)}
-  //           placeholder="Password"
-  //         />
-  //       </Form.Group>
-
-  //       {/* submit button */}
-  //       <Button
-  //         variant="primary"
-  //         type="submit"
-  //         onClick={(e) => handleSubmit(e)}
-  //       >
-  //         Login
-  //       </Button>
-  //     </Form>
-
-  //     {/* display success message */}
-  //     {login ? (
-  //       <p className="text-success">You Are Logged in Successfully</p>
-  //     ) : (
-  //       <p className="text-danger">{errorMessage}</p>
-  //     )}
-  //   </>
-  // );
 }

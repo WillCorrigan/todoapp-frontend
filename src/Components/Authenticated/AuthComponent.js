@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { BeatLoader } from "react-spinners";
-import { Navigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import "./AuthComponent.css";
 const cookies = new Cookies();
@@ -30,12 +29,6 @@ export default function AuthComponent() {
       });
   }, []);
 
-  const logout = () => {
-    cookies.remove("AUTHENTICATION_TOKEN", { path: "/" });
-
-    <Navigate to={`/`} replace />;
-  };
-
   const messageLoaded = message ? (
     <h3 className="text-center text-danger">{message}</h3>
   ) : (
@@ -51,11 +44,6 @@ export default function AuthComponent() {
     <div>
       <h1 className="text-center">Auth Component</h1>
       <div className="justify-content-center">{messageLoaded}</div>
-      <div className="logout-button-container">
-        <button type="submit" variant="danger" onClick={() => logout()}>
-          Logout
-        </button>
-      </div>
     </div>
   );
 }
