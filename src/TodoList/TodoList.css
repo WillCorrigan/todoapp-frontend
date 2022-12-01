@@ -1,0 +1,48 @@
+.todolist-container {
+  display: flex;
+  flex-direction: column;
+  margin: 60px 110px;
+  width: 70%;
+}
+
+.todolist-nav {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin-bottom: 50px;
+  margin-top: 60px;
+  width: 100%;
+}
+
+.todolist-filters {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.todolist-pill {
+  padding: 4px 8px;
+  width: 123px;
+  height: 32px;
+  background-color: #f0f3ff;
+  border-radius: 100px;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  font-size: 14px;
+}
+
+.todolist-pill:hover {
+  font-size: 14px;
+  background-color: #8396e08c;
+  cursor: pointer;
+}
+
+.todolist-pill.active {
+  color: #491ff0;
+  font-weight: 500;
+  background: #a5b5f8;
+}
+
+.todolist-new-pill {
+  margin-left: auto;
+  align-self: center;
+}

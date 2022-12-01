@@ -19,6 +19,9 @@ const SideNav = () => {
       <NavLink className="side-nav-item" to="/auth">
         Auth Needed
       </NavLink>
+      <NavLink className="side-nav-item" to="/todolist">
+        Todos
+      </NavLink>
 
       {token && <Logout />}
     </nav>

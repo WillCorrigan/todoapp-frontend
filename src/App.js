@@ -7,6 +7,7 @@ import SideNav from "./Components/SideNav/SideNav";
 import Home from "./Components/Home/Home";
 import Login from "./Components/Account/Login/Login";
 import Register from "./Components/Account/Register/Register";
+import TodoList from "./TodoList/TodoList";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/free" element={<FreeComponent />} />
+        <Route path="/todolist" element={<TodoList />} />
         <Route
           path="/auth"
           element={
