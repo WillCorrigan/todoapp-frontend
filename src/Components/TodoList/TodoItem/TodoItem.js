@@ -4,7 +4,12 @@ import "./TodoItem.css";
 const TodoItem = (props) => {
   return (
     <div className="todoitem-container">
-      <input type="checkbox" value={props.completed}></input>
+      <input
+        type="checkbox"
+        value={props.completed}
+        onClick={props.onClick}
+        defaultChecked={props.completed}
+      ></input>
       <div className="todoitem-title">{props.title}</div>
     </div>
   );

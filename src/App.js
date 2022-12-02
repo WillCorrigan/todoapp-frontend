@@ -7,7 +7,7 @@ import SideNav from "./Components/SideNav/SideNav";
 import Home from "./Components/Home/Home";
 import Login from "./Components/Account/Login/Login";
 import Register from "./Components/Account/Register/Register";
-import TodoList from "./TodoList/TodoList";
+import TodoList from "./Components/TodoList/TodoList";
 
 function App() {
   return (
