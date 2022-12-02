@@ -25,7 +25,14 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/free" element={<FreeComponent />} />
-        <Route path="/todolist" element={<TodoList />} />
+        <Route
+          path="/todolist"
+          element={
+            <AuthenticationWrapper>
+              <TodoList />
+            </AuthenticationWrapper>
+          }
+        />
         <Route
           path="/auth"
           element={
