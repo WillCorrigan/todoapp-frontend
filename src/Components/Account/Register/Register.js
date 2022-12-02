@@ -31,6 +31,8 @@ export default function Register() {
     axios(configuration)
       .then((result) => {
         setRegistered(true);
+
+        window.location.href = "/todolist";
       })
       .catch((error) => {
         error = new Error();

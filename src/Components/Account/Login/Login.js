@@ -41,7 +41,7 @@ export default function Login() {
         });
 
         // redirect user to the auth page
-        window.location.href = "/auth";
+        window.location.href = "/todolist";
       })
       .catch((error) => {
         setErrorMessage(error.response.data.message);
