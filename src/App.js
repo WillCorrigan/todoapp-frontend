@@ -14,14 +14,7 @@ function App() {
     <div className="App" id="outer-container">
       <SideNav />
       <Routes>
-        <Route
-          path="/"
-          element={
-            <AuthenticationWrapper>
-              <Home />
-            </AuthenticationWrapper>
-          }
-        />
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/free" element={<FreeComponent />} />
@@ -41,14 +34,7 @@ function App() {
             </AuthenticationWrapper>
           }
         />
-        <Route
-          path="*"
-          element={
-            <AuthenticationWrapper>
-              <Home />
-            </AuthenticationWrapper>
-          }
-        />
+        <Route path="*" element={<Home />} />
       </Routes>
     </div>
   );

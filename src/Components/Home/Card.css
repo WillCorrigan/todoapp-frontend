@@ -1,0 +1,44 @@
+.card-container {
+  border-radius: 30px;
+  background-color: #ffffff;
+  color: black;
+  min-width: 300px;
+  min-height: 500px;
+  max-width: 300px;
+  max-height: 500px;
+  margin: 10px;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  box-shadow: 1px 1px 5px rgba(5, 5, 5, 0.288);
+}
+
+.card-title {
+  font-size: 16px;
+  text-align: center;
+  color: black;
+  width: 95%;
+  height: 100%;
+  margin: 20px 5px 0px 5px;
+}
+
+.card-title-text {
+  font-size: 16px;
+}
+
+.card-subtitle-text {
+  font-size: 11px;
+  font-style: italic;
+}
+
+.card-splash-image {
+  width: 100%;
+  height: auto;
+  justify-self: center;
+  border-radius: 30px 30px 0 0;
+}
+
+.card-description {
+  margin: 30px 5px 10px 5px;
+  font-size: 14px;
+  text-align: center;
+}

@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./Register.css";
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -31,6 +33,10 @@ export default function Register() {
     axios(configuration)
       .then((result) => {
         setRegistered(true);
+
+        cookies.set("AUTHENTICATION_TOKEN", result.data.token, {
+          path: "/",
+        });
 
         window.location.href = "/todolist";
       })

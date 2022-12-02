@@ -1,12 +1,12 @@
 import React from "react";
-import "./Logout.css";
+import "./NavLogout.css";
 import jwt_decode from "jwt-decode";
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
 const token = cookies.get("AUTHENTICATION_TOKEN");
 
-const Logout = () => {
+const NavLogout = () => {
   const logoutUser = () => {
     cookies.remove("AUTHENTICATION_TOKEN", { path: "/" });
 
@@ -14,16 +14,16 @@ const Logout = () => {
   };
 
   return (
-    <div className="logout-button-container">
+    <div className="navlogout-button-container">
       <img
-        src="https://icons.iconarchive.com/icons/paomedia/small-n-flat/32/profile-icon.png"
+        src="/images/icons8-male-user-48.png"
         alt="profile"
-        className="logout-profile-img"
+        className="navlogout-profile-img"
       />
-      <div className="logout-side-div">
+      <div className="navlogout-side-div">
         {token && <span>{jwt_decode(token).userEmail}</span>}
         <button
-          className="logout-button"
+          className="navlogout-button"
           type="submit"
           onClick={() => logoutUser()}
         >
@@ -34,4 +34,4 @@ const Logout = () => {
   );
 };
 
-export default Logout;
+export default NavLogout;
