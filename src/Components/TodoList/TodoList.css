@@ -22,7 +22,7 @@
   padding: 4px 8px;
   width: 123px;
   height: 32px;
-  background-color: #f0f3ff;
+  background-color: #b1bef3;
   border-radius: 100px;
   text-align: center;
   text-decoration: none;
@@ -32,17 +32,98 @@
 
 .todolist-pill:hover {
   font-size: 14px;
-  background-color: #8396e08c;
+  background-color: #2f59ff8c;
   cursor: pointer;
 }
 
 .todolist-pill.active {
-  color: #491ff0;
+  color: #fbfaff;
   font-weight: 500;
-  background: #a5b5f8;
+  background: #2950ec;
 }
 
 .todolist-new-pill {
   margin-left: auto;
   align-self: center;
+  padding: 4px 8px;
+  width: 123px;
+  height: 32px;
+  background-color: #55e961;
+  border-radius: 100px;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.todolist-empty-list {
+  align-self: center;
+  margin-top: 50px;
+  font-size: 17px;
+}
+
+.todolist-input {
+  margin-left: auto;
+  padding: 4px 0px;
+  max-width: 100%;
+  opacity: 100%;
+  border-right: 0px;
+  border: 1px solid black;
+  border-radius: 100px 0 0 100px;
+  background-color: rgb(255, 255, 255);
+  font-size: 14px;
+  padding-left: 15px;
+  overflow: clip;
+
+  animation: expandIn 1000ms;
+}
+
+.todolist-input:focus {
+  outline: none;
+}
+
+@keyframes expandIn {
+  0% {
+    opacity: 0;
+    max-width: 0%;
+  }
+  100% {
+    opacity: 100%;
+    max-width: 100%;
+  }
+}
+
+.todolist-close-button {
+  border: 1px solid black;
+  border-left: none;
+  border-radius: 0px 100px 100px 0px;
+  background-color: rgb(80, 77, 78);
+  cursor: pointer;
+  color: white;
+  padding-left: 10px;
+  padding-right: 15px;
+  font-size: 13px;
+  animation: expandIn 1000ms;
+}
+
+.todolist-accept-button {
+  border: 1px solid black;
+  border-left: none;
+  background-color: rgb(38, 216, 77);
+  cursor: pointer;
+  color: white;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 13px;
+  animation: expandIn 1000ms;
+}
+
+.todolist-add-new-container {
+  margin-left: auto;
+  text-align: center;
+}
+
+.todolist-input-container {
+  display: flex;
 }

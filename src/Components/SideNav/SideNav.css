@@ -6,9 +6,9 @@
 
   width: 264px;
   width: 100%;
-  min-height: 100%;
-  overflow-x: hidden;
-  overflow-y: hidden;
+  max-height: 100vh;
+  position: sticky;
+  top: 0;
   background: #1c1c20;
 
   /* Shadow/md */

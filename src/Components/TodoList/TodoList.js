@@ -7,6 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const cookies = new Cookies();
+const token = cookies.get("AUTHENTICATION_TOKEN");
 
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
@@ -14,13 +15,15 @@ const TodoList = () => {
   const [active, setActive] = useState(false);
   const [completed, setCompleted] = useState(false);
   const [archived, setArchived] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+  const [newTodoTitle, setNewTodoTitle] = useState("");
 
   useEffect(() => {
     const configuration = {
       method: "get",
       url: "https://todoapptesting.fly.dev/todo/list",
       headers: {
-        Authorization: `Bearer ${cookies.get("AUTHENTICATION_TOKEN")}`,
+        Authorization: `Bearer ${token}`,
       },
     };
     // make the API call
@@ -73,15 +76,54 @@ const TodoList = () => {
   };
 
   useEffect(() => {
-    const filteredTodos = todos.filter((todo) => {
+    console.log(todos);
+    const newFilteredTodos = todos.filter((todo) => {
       if (archived) {
         return todo.archived === true;
       } else {
         return todo.completed === completed && todo.archived === false;
       }
     });
-    setFilteredTodos(filteredTodos);
+    setFilteredTodos(newFilteredTodos);
   }, [active, completed, archived, todos]);
+
+  const handleNewTodoButtonClick = () => {
+    setExpanded(true);
+  };
+
+  const cancelNewTodo = () => {
+    setExpanded(false);
+  };
+
+  const submitNewTodo = () => {
+    if (newTodoTitle.length <= 0) {
+      setExpanded(false);
+
+      return;
+    }
+    const configuration = {
+      method: "post",
+      url: "https://todoapptesting.fly.dev/todo/add",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      data: {
+        title: newTodoTitle,
+        completed: completed,
+        archived: archived,
+      },
+    };
+    // make the API call
+    axios(configuration)
+      .then((result) => {
+        console.log(result);
+        setTodos([...todos, result.data]);
+        setExpanded(false);
+      })
+      .catch((error) => {
+        error = new Error();
+      });
+  };
 
   return (
     <div className="todolist-container">
@@ -123,21 +165,53 @@ const TodoList = () => {
             Archived
           </button>
         </div>
-        <div className="todolist-new-pill">New To-Do</div>
+        <div className="todolist-add-new-container">
+          {expanded ? (
+            <div className="todolist-input-container">
+              <input
+                className="todolist-input"
+                placeholder="type todo title..."
+                onChange={(e) => setNewTodoTitle(e.target.value)}
+              ></input>
+              <button
+                className="todolist-accept-button"
+                onClick={submitNewTodo}
+              >
+                ✓
+              </button>
+              <button className="todolist-close-button" onClick={cancelNewTodo}>
+                X
+              </button>
+            </div>
+          ) : (
+            <button
+              className="todolist-new-pill"
+              onClick={handleNewTodoButtonClick}
+            >
+              Add New Todo +
+            </button>
+          )}
+        </div>
       </div>
-      <div className="todolist-list">
-        {filteredTodos.map((todo) => {
-          return (
-            <TodoItem
-              key={todo._id}
-              title={todo.title}
-              completed={todo.completed}
-              archived={todo.archived}
-              onClick={() => handleCheckbox(todo._id)}
-            />
-          );
-        })}
-      </div>
+      {filteredTodos.length > 0 ? (
+        <div className="todolist-list">
+          {filteredTodos.map((todo) => {
+            return (
+              <TodoItem
+                key={todo._id}
+                title={todo.title}
+                completed={todo.completed}
+                archived={todo.archived}
+                onClick={() => handleCheckbox(todo._id)}
+              />
+            );
+          })}
+        </div>
+      ) : (
+        <p className="todolist-empty-list">
+          There's nothing here... Why not create a new todo?
+        </p>
+      )}
     </div>
   );
 };
