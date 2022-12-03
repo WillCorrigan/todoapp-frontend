@@ -76,7 +76,6 @@ const TodoList = () => {
   };
 
   useEffect(() => {
-    console.log(todos);
     const newFilteredTodos = todos.filter((todo) => {
       if (archived) {
         return todo.archived === true;
@@ -116,8 +115,7 @@ const TodoList = () => {
     // make the API call
     axios(configuration)
       .then((result) => {
-        console.log(result);
-        setTodos([...todos, result.data]);
+        setTodos([...todos, result.data.todo]);
         setExpanded(false);
       })
       .catch((error) => {
